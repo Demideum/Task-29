@@ -46,7 +46,6 @@ namespace Task_29
             Console.WriteLine("Спасибо что пользовались нашей программой!");
             Console.ReadKey();
         }
-        
         public static void AddProfile(ref string[] position, ref string[] data)
         {
             string[] tempData = new string[data.Length + 1];
@@ -55,11 +54,16 @@ namespace Task_29
             for (int i = 0; i < data.Length; i++)
             {
                 tempData[i] = data[i];
+            }
+
+            for (int i = 0; i < position.Length; i++)
+            {
                 tempPosition[i] = position[i];
             }
+
             data = tempData;
             position = tempPosition;
-            
+
             Console.Write("\nВведите Фамилию Имя Отчество сотрудника: ");
             data[data.Length - 1] = Console.ReadLine();
             Console.Write("\nВведите должность сотрудника: ");
@@ -67,7 +71,6 @@ namespace Task_29
             Console.WriteLine("\nДосье добавлено! Для продолжения нажмите Enter.");
             Console.ReadLine();
         }
-        
         public static void ShowProfiles(ref string[] position, ref string[] data)
         {
             Console.WriteLine();
@@ -83,7 +86,6 @@ namespace Task_29
             Console.WriteLine("\nДля продолжения нажмите Enter.");
             Console.ReadLine();
         }
-        
         public static void DeleteProfile(ref string[] position, ref string[] data)
         {
             int tempIndexArray;
@@ -102,15 +104,19 @@ namespace Task_29
             for (int i = tempIndexArray; i < position.Length; i++)
             {
                 tempPosition[i - 1] = position[i];
+            }
+
+            for (int i = tempIndexArray; i < data.Length; i++)
+            {
                 tempData[i - 1] = data[i];
             }
+
             position = tempPosition;
             data = tempData;
 
             Console.WriteLine("\nДосье удалено! Для продолжения нажмите Enter.");
             Console.ReadLine();
         }
-        
         public static void FindProfile(ref string[] position, ref string[] data)
         {
             string inputSurname = "";
@@ -130,6 +136,7 @@ namespace Task_29
                 Console.WriteLine("\nДосье найдено!");
                 Console.WriteLine($"\n{(indexArray + 1)} - {data[indexArray]} - {position[indexArray]}.");
             }
+
             Console.WriteLine("\nДля продолжения нажмите Enter.");
             Console.ReadLine();
         }
