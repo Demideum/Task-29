@@ -57,9 +57,9 @@ namespace Task_29
                 tempData[i] = data[i];
                 tempPosition[i] = position[i];
             }
-
             data = tempData;
             position = tempPosition;
+            
             Console.Write("\nВведите Фамилию Имя Отчество сотрудника: ");
             data[data.Length - 1] = Console.ReadLine();
             Console.Write("\nВведите должность сотрудника: ");
@@ -104,7 +104,6 @@ namespace Task_29
                 tempPosition[i - 1] = position[i];
                 tempData[i - 1] = data[i];
             }
-
             position = tempPosition;
             data = tempData;
 
