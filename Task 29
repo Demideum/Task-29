@@ -46,23 +46,11 @@ namespace Task_29
             Console.WriteLine("Спасибо что пользовались нашей программой!");
             Console.ReadKey();
         }
+        
         public static void AddProfile(ref string[] position, ref string[] data)
         {
-            string[] tempData = new string[data.Length + 1];
-            string[] tempPosition = new string[position.Length + 1];
-
-            for (int i = 0; i < data.Length; i++)
-            {
-                tempData[i] = data[i];
-            }
-
-            for (int i = 0; i < position.Length; i++)
-            {
-                tempPosition[i] = position[i];
-            }
-
-            data = tempData;
-            position = tempPosition;
+            expansionArray(ref data);
+            expansionArray(ref position);
 
             Console.Write("\nВведите Фамилию Имя Отчество сотрудника: ");
             data[data.Length - 1] = Console.ReadLine();
@@ -71,6 +59,7 @@ namespace Task_29
             Console.WriteLine("\nДосье добавлено! Для продолжения нажмите Enter.");
             Console.ReadLine();
         }
+        
         public static void ShowProfiles(ref string[] position, ref string[] data)
         {
             Console.WriteLine();
@@ -86,37 +75,21 @@ namespace Task_29
             Console.WriteLine("\nДля продолжения нажмите Enter.");
             Console.ReadLine();
         }
+        
         public static void DeleteProfile(ref string[] position, ref string[] data)
         {
-            int tempIndexArray;
-            string[] tempPosition = new string[position.Length - 1];
-            string[] tempData = new string[data.Length - 1];
+            int inputUser;
 
             Console.WriteLine("Введите порядковый номер досье для удаления:");
-            tempIndexArray = Convert.ToInt32(Console.ReadLine());
+            inputUser = Convert.ToInt32(Console.ReadLine());
 
-            for (int i = 0; i < tempIndexArray - 1; i++)
-            {
-                tempData[i] = data[i];
-                tempPosition[i] = position[i];
-            }
-
-            for (int i = tempIndexArray; i < position.Length; i++)
-            {
-                tempPosition[i - 1] = position[i];
-            }
-
-            for (int i = tempIndexArray; i < data.Length; i++)
-            {
-                tempData[i - 1] = data[i];
-            }
-
-            position = tempPosition;
-            data = tempData;
+            reducingArray(ref data, ref inputUser);
+            reducingArray(ref position, ref inputUser);
 
             Console.WriteLine("\nДосье удалено! Для продолжения нажмите Enter.");
             Console.ReadLine();
         }
+        
         public static void FindProfile(ref string[] position, ref string[] data)
         {
             string inputSurname = "";
@@ -136,9 +109,35 @@ namespace Task_29
                 Console.WriteLine("\nДосье найдено!");
                 Console.WriteLine($"\n{(indexArray + 1)} - {data[indexArray]} - {position[indexArray]}.");
             }
-
             Console.WriteLine("\nДля продолжения нажмите Enter.");
             Console.ReadLine();
+        }
+        
+        public static void expansionArray(ref string[] array)
+        {
+            string[] tempArray = new string[array.Length + 1];
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                tempArray[i] = array[i];
+            }
+            array = tempArray;
+        }
+        
+        public static void reducingArray(ref string[] array, ref int inputUser)
+        {
+            string[] tempArray = new string[array.Length - 1];
+
+            for (int i = 0; i < inputUser - 1; i++)
+            {
+                tempArray[i] = array[i];
+            }
+
+            for (int i = inputUser; i < array.Length; i++)
+            {
+                tempArray[i - 1] = array[i];
+            }
+            array = tempArray;
         }
     }
 }
