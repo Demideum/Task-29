@@ -49,8 +49,8 @@ namespace Task_29
         
         public static void AddProfile(ref string[] position, ref string[] data)
         {
-            expansionArray(ref data);
-            expansionArray(ref position);
+            ExpansionArray(ref data);
+            ExpansionArray(ref position);
 
             Console.Write("\nВведите Фамилию Имя Отчество сотрудника: ");
             data[data.Length - 1] = Console.ReadLine();
@@ -83,8 +83,8 @@ namespace Task_29
             Console.WriteLine("Введите порядковый номер досье для удаления:");
             inputUser = Convert.ToInt32(Console.ReadLine());
 
-            reducingArray(ref data, ref inputUser);
-            reducingArray(ref position, ref inputUser);
+            ReducingArray(ref data, ref inputUser);
+            ReducingArray(ref position, ref inputUser);
 
             Console.WriteLine("\nДосье удалено! Для продолжения нажмите Enter.");
             Console.ReadLine();
@@ -113,7 +113,7 @@ namespace Task_29
             Console.ReadLine();
         }
         
-        public static void expansionArray(ref string[] array)
+        public static void ExpansionArray(ref string[] array)
         {
             string[] tempArray = new string[array.Length + 1];
 
@@ -124,7 +124,7 @@ namespace Task_29
             array = tempArray;
         }
         
-        public static void reducingArray(ref string[] array, ref int inputUser)
+        public static void ReducingArray(ref string[] array, ref int inputUser)
         {
             string[] tempArray = new string[array.Length - 1];
 
