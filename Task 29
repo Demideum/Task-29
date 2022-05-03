@@ -1,0 +1,138 @@
+namespace Task_29
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            bool isWorking = true;
+            string userInput;
+
+            string[] staffData = new string[3];
+            string[] staffPosition = new string[3];
+
+            staffData[0] = "Иванов Иван Иваныч";
+            staffData[1] = "Петров Петр Петрович";
+            staffData[2] = "Сидоров Сидор Сидорович";
+            staffPosition[0] = "Директор";
+            staffPosition[1] = "Менеджер";
+            staffPosition[2] = "Повар";
+
+            while (isWorking)
+            {
+                Console.Clear();
+                Console.WriteLine("Введите номер команды! \n1) добавить досье;\n2) вывести все досье;\n3) удалить досье;\n4) поиск по фамилии;\n5) выход.");
+
+                userInput = Console.ReadLine();
+
+                switch (userInput)
+                {
+                    case "1":
+                        AddProfile(ref staffPosition, ref staffData);
+                        break;
+                    case "2":
+                        ShowProfiles(ref staffPosition, ref staffData);
+                        break;
+                    case "3":
+                        DeleteProfile(ref staffPosition, ref staffData);
+                        break;
+                    case "4":
+                        FindProfile(ref staffPosition, ref staffData);
+                        break;
+                    case "5":
+                        isWorking = !isWorking;
+                        break;
+                }
+            }
+            Console.WriteLine("Спасибо что пользовались нашей программой!");
+            Console.ReadKey();
+        }
+        
+        public static void AddProfile(ref string[] position, ref string[] data)
+        {
+            string[] tempData = new string[data.Length + 1];
+            string[] tempPosition = new string[position.Length + 1];
+
+            for (int i = 0; i < data.Length; i++)
+            {
+                tempData[i] = data[i];
+                tempPosition[i] = position[i];
+            }
+
+            data = tempData;
+            position = tempPosition;
+            Console.Write("\nВведите Фамилию Имя Отчество сотрудника: ");
+            data[data.Length - 1] = Console.ReadLine();
+            Console.Write("\nВведите должность сотрудника: ");
+            position[position.Length - 1] = Console.ReadLine();
+            Console.WriteLine("\nДосье добавлено! Для продолжения нажмите Enter.");
+            Console.ReadLine();
+        }
+        
+        public static void ShowProfiles(ref string[] position, ref string[] data)
+        {
+            Console.WriteLine();
+            Console.WriteLine("Список всех досье:");
+
+            for (int i = 0; i < data.Length; i++)
+            {
+                if (data[i] != "" && position[i] != "")
+                {
+                    Console.WriteLine($"{(i + 1)} - {data[i]} - {position[i]}.");
+                }
+            }
+            Console.WriteLine("\nДля продолжения нажмите Enter.");
+            Console.ReadLine();
+        }
+        
+        public static void DeleteProfile(ref string[] position, ref string[] data)
+        {
+            int tempIndexArray;
+            string[] tempPosition = new string[position.Length - 1];
+            string[] tempData = new string[data.Length - 1];
+
+            Console.WriteLine("Введите порядковый номер досье для удаления:");
+            tempIndexArray = Convert.ToInt32(Console.ReadLine());
+
+            for (int i = 0; i < tempIndexArray - 1; i++)
+            {
+                tempData[i] = data[i];
+                tempPosition[i] = position[i];
+            }
+
+            for (int i = tempIndexArray; i < position.Length; i++)
+            {
+                tempPosition[i - 1] = position[i];
+                tempData[i - 1] = data[i];
+            }
+
+            position = tempPosition;
+            data = tempData;
+
+            Console.WriteLine("\nДосье удалено! Для продолжения нажмите Enter.");
+            Console.ReadLine();
+        }
+        
+        public static void FindProfile(ref string[] position, ref string[] data)
+        {
+            string inputSurname = "";
+            int indexArray = 0;
+
+            Console.Write("Введите Фамилию для поиска досье: ");
+            inputSurname = Console.ReadLine();
+
+            indexArray = Array.FindIndex(data, fullName => fullName.ToLower().Contains(inputSurname.ToLower()));
+
+            if (indexArray == -1)
+            {
+                Console.WriteLine("\nТакое досье не найдено!");
+            }
+            else
+            {
+                Console.WriteLine("\nДосье найдено!");
+                Console.WriteLine($"\n{(indexArray + 1)} - {data[indexArray]} - {position[indexArray]}.");
+            }
+            Console.WriteLine("\nДля продолжения нажмите Enter.");
+            Console.ReadLine();
+        }
+    }
+}
